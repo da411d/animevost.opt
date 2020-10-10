@@ -16,6 +16,12 @@ module.exports = {
     filename: "./dist/[name].bundle.js",
     path: path.resolve(__dirname, ""),
   },
+  resolve: {
+    alias: {
+      "@utils": path.resolve(__dirname, "src/utils"),
+    },
+    extensions: [".js"],
+  },
   plugins: [
     new webpack.SourceMapDevToolPlugin({
       filename: './dist/[name].bundle.js.map',
