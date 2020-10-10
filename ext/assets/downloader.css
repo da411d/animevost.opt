@@ -52,7 +52,7 @@
   cursor: pointer;
 }
 
-.download-popup .download-popup__close {
+.download-popup__close {
   position: absolute;
   top: 0;
   right: 0;
@@ -68,7 +68,7 @@
   border-radius: 0;
 }
 
-.download-popup .download-popup__header {
+.download-popup__header {
   flex-grow: 0;
   padding: 16px;
   border-bottom: 1px solid #eaca9a;
@@ -78,42 +78,27 @@
   text-shadow: 0 1px 0 #ffffff;
 }
 
-.download-popup .download-popup__container {
+.download-popup__container {
   overscroll-behavior: none;
   overflow-y: auto;
   flex-grow: 1;
   padding: 16px;
 }
 
-.download-popup .download-popup__footer {
-  flex-grow: 0;
-}
-
-.download-popup .download-popup__download-all {
+.download-popup__footer {
   flex-grow: 0;
 }
 
 
-.download-popup h1 {
+.download-popup__h1 {
   font-size: 24px;
   line-height: 32px;
 }
 
-.download-popup p {
-  margin-bottom: 16px;
-}
-
-.download-popup p.info {
-  padding: 8px 16px;
-  background: #ffffcc;
-  border: 1px solid #f0f0aa;
-  border-radius: 3px;
-}
-
-.download-popup a {
+.download-popup__episode {
   display: block;
   padding: 8px 16px;
-  margin: 8px 0;
+  margin: 0 0 8px 0;
   background: #fed497;
   border: 1px solid #ffad2b;
   border-radius: 3px;
@@ -121,7 +106,29 @@
   color: #000000;
 }
 
-.download-popup button {
+.download-popup__episode__not-clickable{
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.download-popup__episode__success{
+  background: #ccf0cc;
+  border: 1px solid #aaf0aa;
+}
+
+.download-popup__episode__fail{
+  background: #fff0f0;
+  border: 1px solid #f0aaaa;
+}
+
+.download-popup__episode[data-after]:after {
+  content: attr(data-after);
+  float: right;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.download-popup__button {
+  flex-grow: 0;
   display: block;
   width: 100%;
   padding: 8px;
@@ -134,28 +141,14 @@
   font-size: 17px;
 }
 
-.download-popup a.important {
-  background: #ffcccc;
-  border: 1px solid #f0aaaa;
-}
-
-.download-popup [data-after]:after {
-  content: attr(data-after);
-}
-
-.download-popup .disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-
+/* Скролбар */
 .download-popup ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
 }
 
 .download-popup ::-webkit-scrollbar-track {
-  border-left: 0px
+  border-left: 0;
 }
 
 .download-popup ::-webkit-scrollbar-thumb {
@@ -163,22 +156,5 @@
 }
 
 .download-popup ::-webkit-scrollbar-thumb:hover {
-  background-color: #c47504;
-}
-
-.download-popup ::scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-.download-popup ::scrollbar-track {
-  border-left: 0px
-}
-
-.download-popup ::scrollbar-thumb {
-  background-color: #ffc579;
-}
-
-.download-popup ::scrollbar-thumb:hover {
   background-color: #c47504;
 }

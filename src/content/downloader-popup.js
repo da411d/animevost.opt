@@ -19,6 +19,7 @@ const header = el("div", {
     className: "download-popup__header",
   },
   el("h1", {
+    className: "download-popup__h1",
     innerText: "Animevost downloader",
   }),
   el("button", {
@@ -41,14 +42,14 @@ const footer = el("div", {
     className: "download-popup__footer",
   },
   el("button", {
-    className: "download-popup__download-all",
+    className: "download-popup__button",
     innerText: "Скачать все",
     on: {
       click: eventEmitter.generateDispatch("download-all"),
     },
   }),
   el("button", {
-    className: "download-popup__download-all",
+    className: "download-popup__button",
     innerText: "💰 Поддержать разработчика 💰",
     on: {
       click: eventEmitter.generateDispatch("support-developer"),

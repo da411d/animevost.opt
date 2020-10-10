@@ -20,7 +20,7 @@ const createEpisodesList = () => {
     }));
 };
 
-const prepareLinks = async () => {
+const renderLinks = () => {
   const animeName = getAnimeName();
   const episodes = createEpisodesList();
   
@@ -31,6 +31,7 @@ const prepareLinks = async () => {
       id: episode.id,
     };
     const link = el("a", {
+      className: "download-popup__episode",
       innerText: episode.title,
       href: "#!",
       id: "episode-" + episode.id,
@@ -57,27 +58,32 @@ const updateDownloadStatus = (info) => {
   if (downloadLink) {
     switch (status) {
       case "downloading":
-        downloadLink.dataset.after = Math.round(progress * 100) + "% ⌛";
-        downloadLink.style = "";
+        const progressText = progress > 0.01 ? Math.round(progress * 100) + "%" : "Загрузка...";
+        downloadLink.dataset.after = progressText + " ⌛";
+        downloadLink.classList.add("download-popup__episode__not-clickable");
+        downloadLink.classList.remove("download-popup__episode__success", "download-popup__episode__fail");
         break;
       
       case "success":
         downloadLink.dataset.after = "Загрузка завершена ✅";
-        downloadLink.style = "box-shadow: none;background: #ccf0cc;border: 1px solid #aaf0aa;";
+        downloadLink.classList.add("download-popup__episode__success");
+        downloadLink.classList.remove("download-popup__episode__not-clickable");
         break;
       
       case "fail":
         downloadLink.dataset.after = "Загрузка не удалась ❌";
-        downloadLink.style = "box-shadow: none;background: #fff0f0;border: 1px solid #f0aaaa;";
+        downloadLink.classList.add("download-popup__episode__fail");
+        downloadLink.classList.remove("download-popup__episode__not-clickable");
         break;
     }
   }
 };
+window._eventEmitter = eventEmitter;
 eventEmitter.subscribe("download-update", updateDownloadStatus);
 
 const init = () => {
   popup.init();
-  prepareLinks();
+  renderLinks();
   
   
   eventEmitter.subscribe("support-developer", () => window.open("https://daki.me/sayThanks/"));
@@ -104,7 +110,7 @@ const init = () => {
   //   }
   // });
   // window.onbeforeunload = () => links_container.qqq("a.loading").length ? true : null;
-  // self.prepareLinks();
+  // self.renderLinks();
   
   const style = el("link", {
     rel: "stylesheet",

@@ -284,6 +284,10 @@ fieldset,
   border-radius: 6px !important;
 }
 
+#shortstoryContentTegi{
+  display: none !important;
+}
+
 .text_spoiler {
   border-radius: 0px 0px 6px 6px !important;
   margin: 0 4px !important;
