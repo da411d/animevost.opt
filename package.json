@@ -1,0 +1,16 @@
+{
+  "name": "animevost.opt",
+  "version": "1.0.0",
+  "description": "Animevost Optimizer",
+  "scripts": {
+    "build": "build",
+    "watch": "webpack -w --mode development"
+  },
+  "author": {
+    "name": "David Manzhula @da411d"
+  },
+  "devDependencies": {
+    "webpack": "^4"
+  },
+  "dependencies": {}
+}
