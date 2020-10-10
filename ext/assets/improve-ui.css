@@ -1,0 +1,344 @@
+/**
+  В цьому файлі стилі, які покращують інтерфейс сайта, видаляють рекламу і так далі
+ */
+
+/* Пошук в шапці */
+.topLine form input.search {
+  border-radius: 32px !important;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1) !important;
+  padding: 0 36px 0 16px !important;
+}
+
+/* результати пошуку */
+#searchsuggestions {
+  width: 400px !important;
+  border: none !important;
+  background: none !important;
+  height: initial !important;
+  padding-top: 8px;
+}
+
+#searchsuggestions a {
+  padding: 8px;
+  border-radius: 4px !important;
+  margin-bottom: 4px !important;
+  border: none !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+#searchsuggestions a:hover {
+  background: #fef4e6 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+
+/*
+  Вирівнюєм головний блок на свсю ширину
+*/
+#leftBlock-1 {
+  display: none !important;
+}
+
+#centerBlock,
+.shortstory, /* це тоже блок з контентом в #ctnterBlock */
+.shortstory > * {
+  width: auto !important;
+  float: none !important;
+}
+
+/* просто всі блоки на всю ширину */
+#wrap > *,
+.menu {
+  min-width: initial !important;
+  max-width: 100% !important;
+}
+
+/* робим шапку норм */
+
+[class*='headbg'] {
+  background: none !important;
+  height: initial !important;
+  position: initial !important;
+}
+
+[class*='headbg'] > a {
+  display: none !important;
+}
+
+
+.menu {
+  position: relative !important;
+  top: initial !important;
+  background: #fbc182 !important;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+.menu a[href*="rss.xml"] {
+  display: none !important;
+}
+
+.menu ul {
+  display: flex !important;
+}
+
+.menu ul li a {
+  float: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: initial !important;
+  padding: 16px !important;
+  background: none !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.menu ul li .sar {
+  display: block !important;
+  z-index: 1000;
+  bottom: initial !important;
+  top: 100%;
+  border-radius: 6px;
+  background: #fbc182 !important;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.menu ul li .sar:after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+}
+
+.menu ul li:not(:hover) .sar {
+  opacity: 0;
+  transform: translateY(24px);
+  pointer-events: none;
+  transition-delay: 0.5s;
+}
+
+.menu ul li .sar * {
+  height: initial !important;
+  width: initial !important;
+  text-align: center;
+}
+
+.menu ul li .sar span {
+  padding: 8px !important;
+}
+
+.menu ul li .sar a {
+  border-radius: 4px !important;
+}
+
+.menu ul li .sar a:hover {
+  background: #fde8cb !important;
+}
+
+.menu ul li a[href*='?do=feedback'i],
+.menu ul li a[href*='dlya-pravoobladateley'i],
+.menu ul li a[href*='?action=mobile'i] {
+  display: none !important;
+}
+
+.menu ul li a[href='/'i]{
+  position: relative !important;
+  padding-left: calc(16px + 16px + 80px) !important;
+}
+.menu ul li a[href='/'i]:before{
+  content: '';
+  position: absolute;
+  z-index: 1000000;
+  top: -16px;
+  left: 16px;
+  width: 80px;
+  height: 80px;
+  background-image: url("chrome-extension://__MSG_@@extension_id__/assets/logo.png");
+  background-size: contain;
+}
+
+
+/* карточка з постом або контентом */
+.shortstory {
+  margin-bottom: 16px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1) !important;
+  background: #fde8cb !important;
+}
+
+.shortstory > *{
+  padding: 16px !important;
+}
+
+.shortstory .shortstoryHead h2,
+.shortstory .shortstoryHead h1 {
+  font-size: 18px !important;
+  line-height: 24px !important;
+  padding: 0 !important;
+  font-weight: bold !important;
+  background: none !important;
+  border: none !important;
+}
+
+.shortstory .shortstoryHead h2 a,
+.shortstory .shortstoryHead h1 a {
+  display: block;
+}
+
+.shortstory .staticInfo {
+  display: none !important;
+}
+
+.shortstory .imgRadius {
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+/* Панель з серіями */
+
+#stdplayer, /* контейнер для кнопок вліво-вправо і самих кнопок з серіями */
+#scrolltwo, /* скролабельний контейнер для кнопок з серіями */
+#items /* безпосередній контейнер для кнопок з серіями */
+{
+  width: 100% !important;
+  height: initial !important;
+  float: none !important;
+  overflow: initial !important;
+  border: none !important;
+}
+
+#stdplayer .prev,
+#stdplayer .next {
+  display: none !important
+}
+
+/* безпосередній контейнер для кнопок з серіями */
+#items {
+  display: grid !important;
+  gap: 4px !important;
+  justify-items: stretch !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  width: 100% !important;
+  margin: 0 0 8px 0 !important;
+}
+
+/* Самі кнопки з серіями */
+.epizode {
+  width: auto !important;
+  height: auto !important;
+  padding: 8px !important;
+  display: inline-block !important;
+  float: none !important;
+  margin: 0 !important;
+  border: 1px solid #ffa20f !important;
+  border-radius: 4px !important;
+  
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+/* панель під відео з ненужними кнопками */
+.functionPanel {
+  display: none;
+}
+
+/* плеєр ставим по центру */
+#anime {
+  background: none !important;
+}
+
+#player2 {
+  position: relative;
+  width: 100% !important;
+  height: initial !important;
+  margin: auto !important;
+  padding-bottom: 60% !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+#player2 > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+}
+
+/* блок з описом серій */
+.ca-container {
+  display: none !important;
+}
+
+.shortstoryContent #spoiler,
+.shortstoryContent #buttonLike,
+.shortstoryContent #shortstoryContentTegi,
+fieldset,
+.title_spoiler {
+  border-radius: 6px !important;
+}
+
+.text_spoiler {
+  border-radius: 0px 0px 6px 6px !important;
+  margin: 0 4px !important;
+}
+
+/* коментар */
+#rulesComment,
+.commentFinal {
+  border: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+.commentFinal * {
+  border-color: #ffc870 !important;
+}
+
+.commentFinal .commentFinalAva img {
+  border-radius: 128px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* індикатор загрузки коментарів */
+#loading-layer {
+  border-radius: 32px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+  opacity: 1 !important;
+  top: initial !important;
+  bottom: 32px !important;
+}
+
+
+/* Блок з якимось контентом зазвичай */
+.userinfo {
+  width: initial !important;
+  border-radius: 8px;
+}
+
+/* зносим нафіг футер */
+#futer {
+  display: none;
+}
+
+
+/* блокуваня реклами */
+div[id^='M'i][id*='ScriptRoot'i] {
+  display: none !important;
+}
+
+/* такий рекламний блок зверху сторінки */
+.batre {
+  display: none !important;
+}
+
+/* ці ссики 99% що реклама */
+a[href^='http'][target='_blank'i]:not([href*='animevost.org']) {
+  display: none !important;
+}
