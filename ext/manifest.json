@@ -3,8 +3,8 @@
   "manifest_version": 2,
   "name": "__MSG_name__",
   "description": "__MSG_description__",
-  "version": "1.2.0",
-  "minimum_chrome_version": "40",
+  "version": "1.0",
+  "minimum_chrome_version": "55",
   "default_locale": "en",
   "icons": {
     "128": "icon_128.png"
@@ -28,8 +28,13 @@
   "content_scripts": [
     {
       "matches": [
-        "http://*/*",
-        "https://*/*"
+        "*://animevost.org/*",
+        "*://*.animevost.org/*",
+        
+        "*://*.animevost.am/*",
+        
+        "*://agorov.org/*",
+        "*://*.agorov.org/*"
       ],
       "js": [
         "content.bundle.js"
