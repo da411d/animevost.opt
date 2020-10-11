@@ -22,7 +22,8 @@
   "permissions": [
     "<all_urls>",
     "tabs",
-    "storage"
+    "storage",
+    "downloads"
   ],
   "content_scripts": [
     {

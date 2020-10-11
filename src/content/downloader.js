@@ -15,8 +15,8 @@ const getAnimeName = () => {
 const createEpisodesList = () => {
   return qqq("#items > div")
     .map(el => ({
-      id: el.getAttribute("onclick").match(/ajax2\(([0-9]+),/)[1],
-      title: el.innerText.trim(),
+      episodeId: el.getAttribute("onclick").match(/ajax2\(([0-9]+),/)[1],
+      episodeTitle: el.innerText.trim(),
     }));
 };
 
@@ -25,18 +25,22 @@ const renderLinks = () => {
   const episodes = createEpisodesList();
   
   for (const episode of episodes) {
+    const {episodeId, episodeTitle} = episode;
     const eventDetails = {
       animeName,
-      title: episode.title,
-      id: episode.id,
+      episode,
+      url: location.href,
     };
     const link = el("a", {
       className: "download-popup__episode",
-      innerText: episode.title,
+      innerText: episodeTitle,
       href: "#!",
-      id: "episode-" + episode.id,
+      id: "episode-" + episodeId,
       on: {
-        click: eventEmitter.generateDispatch("download-episode", eventDetails),
+        click: () => {
+          link.classList.add("download-popup__episode__not-clickable");
+          eventEmitter.dispatch("download-episode", eventDetails);
+        },
       },
     });
     popup.container.appendChild(link);
@@ -51,7 +55,8 @@ const renderLinks = () => {
 };
 
 const updateDownloadStatus = (info) => {
-  const {episodeId, status, progress} = info;
+  const {episode, status, progress} = info;
+  const {episodeId, episodeTitle} = episode;
   
   const downloadLinkId = "episode-" + episodeId;
   const downloadLink = qq("#" + downloadLinkId);
@@ -85,12 +90,15 @@ const init = () => {
   popup.init();
   renderLinks();
   
-  
   eventEmitter.subscribe("support-developer", () => window.open("https://daki.me/sayThanks/"));
-  eventEmitter.subscribe("download-all", () => alert("DOWNLOAD ALL"));
+  eventEmitter.subscribe("download-all", () => {
+    const links = popup.container.qqq("a");
+    if (links.length <= 2 || confirm("Начать загрузку?")) {
+      links.forEach(link => link.click());
+    }
+  });
   
-  
-  // Кнопка "скачати" (відкриває попап для скачування"
+  // Кнопка "скачати" (відкриває попап для скачування")
   if (qq(".shortstoryHead h1")) {
     const downloadButton = el("a", {
       href: "#!",
@@ -102,15 +110,6 @@ const init = () => {
     });
     qq(".shortstoryHead h1").appendChild(downloadButton);
   }
-  
-  // Onori.action("downloadAll", () => {
-  //   let links = self.links_container.qqq("a");
-  //   if (links.length <= 2 || confirm("Начать загрузку?")) {
-  //     links.forEach(link => link.click());
-  //   }
-  // });
-  // window.onbeforeunload = () => links_container.qqq("a.loading").length ? true : null;
-  // self.renderLinks();
   
   const style = el("link", {
     rel: "stylesheet",
