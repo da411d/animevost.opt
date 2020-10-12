@@ -1,4 +1,5 @@
 const {el} = require("@utils/utils");
+const _l = require("@utils/i18n");
 const eventEmitter = require("@utils/eventEmitter");
 
 const popup = el("div", {
@@ -20,7 +21,7 @@ const header = el("div", {
   },
   el("h1", {
     className: "download-popup__h1",
-    innerText: "Animevost downloader",
+    innerText: _l("download_popup__title"),
   }),
   el("button", {
     className: "download-popup__close",
@@ -43,16 +44,23 @@ const footer = el("div", {
   },
   el("button", {
     className: "download-popup__button",
-    innerText: "Скачать все",
+    innerText: _l("download_popup__download_all"),
     on: {
       click: eventEmitter.generateDispatch("download-all"),
     },
   }),
   el("button", {
     className: "download-popup__button",
-    innerText: "💰 Поддержать разработчика 💰",
+    innerText: _l("download_popup__support_developer"),
     on: {
       click: eventEmitter.generateDispatch("support-developer"),
+    },
+  }),
+  el("button", {
+    className: "download-popup__button",
+    innerText: _l("download_popup__support_animevost"),
+    on: {
+      click: eventEmitter.generateDispatch("support-animevost"),
     },
   }));
 popup.appendChild(footer);

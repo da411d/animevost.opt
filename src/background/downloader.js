@@ -61,12 +61,14 @@ const downloadEpisode = async info => {
   const {episode, animeName, url} = info;
   const {episodeId, episodeTitle} = episode;
   
+  const folderName = "anime__" + animeName;
   let fileName = animeName + "__" + episodeTitle;
   fileName = fileName
     .replace(/[\W]/ig, "-")
     .replace(/-+/g, "-")
     .replace(/(^-|-$)/g, "")
     .concat(".mp4");
+  const downloadFileName = folderName + "/" + fileName;
   
   const videoSrcSet = await getVideoSrcset(info);
   const sourcesSortedByHd = [
@@ -77,7 +79,7 @@ const downloadEpisode = async info => {
   for (const source of sourcesSortedByHd) {
     const downloadId = await downloads.download({
       url: source,
-      filename: fileName,
+      filename: downloadFileName,
     });
     const result = await observeProgress(downloadId, ({progress, status}) => {
       eventEmitter.dispatch("download-update", {

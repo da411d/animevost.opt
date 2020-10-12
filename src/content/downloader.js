@@ -1,5 +1,7 @@
 const {el, sleep, qq, qqq} = require("@utils/utils");
 const eventEmitter = require("@utils/eventEmitter");
+const _l = require("@utils/i18n");
+const chrome = require("@utils/chrome");
 const {getURL} = chrome.runtime;
 
 const popup = require("./downloader-popup");
@@ -48,7 +50,7 @@ const renderLinks = () => {
   
   if (!episodes.length) {
     popup.container.appendChild(el("p", {
-      innerText: "Нет доступных для загрузки епизодов",
+      innerText: _l("download_popup__no_available"),
       style: "text-align: center; opacity: 0.5;",
     }));
   }
@@ -63,20 +65,21 @@ const updateDownloadStatus = (info) => {
   if (downloadLink) {
     switch (status) {
       case "downloading":
-        const progressText = progress > 0.01 ? Math.round(progress * 100) + "%" : "Загрузка...";
-        downloadLink.dataset.after = progressText + " ⌛";
+        const progressText = _l(progress > 0.01 ? "download_popup__download_downloading" : "download_popup__download_loading")
+          .replace("{n}", Math.round(progress * 100));
+        downloadLink.dataset.after = progressText;
         downloadLink.classList.add("download-popup__episode__not-clickable");
         downloadLink.classList.remove("download-popup__episode__success", "download-popup__episode__fail");
         break;
       
       case "success":
-        downloadLink.dataset.after = "Загрузка завершена ✅";
+        downloadLink.dataset.after = _l("download_popup__download_success");
         downloadLink.classList.add("download-popup__episode__success");
         downloadLink.classList.remove("download-popup__episode__not-clickable");
         break;
       
       case "fail":
-        downloadLink.dataset.after = "Загрузка не удалась ❌";
+        downloadLink.dataset.after = _l("download_popup__download_fail");
         downloadLink.classList.add("download-popup__episode__fail");
         downloadLink.classList.remove("download-popup__episode__not-clickable");
         break;
@@ -91,9 +94,10 @@ const init = () => {
   renderLinks();
   
   eventEmitter.subscribe("support-developer", () => window.open("https://daki.me/sayThanks/"));
+  eventEmitter.subscribe("support-animevost", () => window.open("https://www.patreon.com/animevostorg"));
   eventEmitter.subscribe("download-all", () => {
     const links = popup.container.qqq("a");
-    if (links.length <= 2 || confirm("Начать загрузку?")) {
+    if (links.length <= 2 || confirm(_l("download_popup__download_confirm"))) {
       links.forEach(link => link.click());
     }
   });
@@ -103,7 +107,7 @@ const init = () => {
     const downloadButton = el("a", {
       href: "#!",
       className: "download-button",
-      innerText: "СКАЧАТЬ",
+      innerText: _l("download_button__download"),
       on: {
         click: eventEmitter.generateDispatch("open-popup"),
       }

@@ -1,0 +1,44 @@
+{
+  "name": {
+    "message": "Animevost.opt"
+  },
+  "description": {
+    "message": "Делает сайт AnimeVost.org немного удобнее и красивее. Дает возможность скачать весь сезон за раз для просмотра офлайн."
+  },
+  
+  "download_button__download": {
+    "message": "Скачать"
+  },
+  
+  "download_popup__title": {
+    "message": "Скачать"
+  },
+  "download_popup__download_all": {
+    "message": "Скачать все"
+  },
+  "download_popup__support_developer": {
+    "message": "\uD83D\uDCB0 Поддержать разработчика \uD83D\uDCB0"
+  },
+  "download_popup__support_animevost": {
+    "message": "\uD83D\uDCB0 \uD83D\uDCB0 Поддержать Animevost \uD83D\uDCB0 \uD83D\uDCB0"
+  },
+  
+  "download_popup__download_confirm": {
+    "message": "Начать загрузку?"
+  },
+  "download_popup__download_success": {
+    "message": "Загрузка завершена ✅"
+  },
+  "download_popup__download_fail": {
+    "message": "Загрузка не удалась ❌"
+  },
+  "download_popup__download_loading": {
+    "message": "Загрузка... ⌛"
+  },
+  "download_popup__download_downloading": {
+    "message": "{n}%  ⌛"
+  },
+  "download_popup__no_available": {
+    "message": "Нет доступных для загрузки епизодов"
+  }
+}
