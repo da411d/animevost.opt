@@ -1,4 +1,4 @@
-const {sleep} = require("@utils/utils");
+const { sleep } = require("@utils/utils");
 const eventEmitter = require("@utils/eventEmitter");
 const downloads = require("@utils/downloads");
 const { apiRequest } = require("./api");
@@ -8,22 +8,22 @@ const ajax = async url => await fetch(url, {
 }).then(response => response.text());
 
 const getVideoSrcset = async (info) => {
-  const {episode, animeName, url} = info;
-  const {episodeId, episodeTitle} = episode;
+  const { episode, animeName, url } = info;
+  const { episodeId, episodeTitle } = episode;
   
   // Спочатку пробуєм достучатись по API
   try {
     const videoSources = await apiRequest("videolinks", {
       id: episodeId,
     });
-    const {links, hdlinks} = videoSources;
+    const { links, hdlinks } = videoSources;
     
     const downloadLinks = [
-        ...hdlinks.filter(link => /\.mp4$/.test(link)),
+      ...hdlinks.filter(link => /\.mp4$/.test(link)),
       ...links.filter(link => /\.mp4$/.test(link)),
     ].filter(link => !link.includes("drek.cdn.zerocdn.com"));
     
-    if(downloadLinks.length){
+    if (downloadLinks.length) {
       return downloadLinks;
     }
   } catch (e) {
@@ -45,11 +45,11 @@ const getVideoSrcset = async (info) => {
     const downloadLinks = [...playerDocument.querySelectorAll("a[download]")]
       .map(a => a.href);
     
-    if(downloadLinks.length){
+    if (downloadLinks.length) {
       return downloadLinks;
     }
   } catch (e) {
-    console.warn("Unable to obtain episode video source", e);
+    console.warn("Unable to obtain episode video source\n", e);
   }
   
   return [];
@@ -58,7 +58,7 @@ const getVideoSrcset = async (info) => {
 const observeProgress = async (downloadId, progressNotifier = console.debug) => {
   while (true) {
     await sleep(250);
-    const {state, bytesReceived, totalBytes, error} = await downloads.get({
+    const { state, bytesReceived, totalBytes, error } = await downloads.get({
       id: downloadId,
     });
     
@@ -82,8 +82,8 @@ const observeProgress = async (downloadId, progressNotifier = console.debug) => 
 };
 
 const downloadEpisode = async info => {
-  const {episode, animeName, url} = info;
-  const {episodeId, episodeTitle} = episode;
+  const { episode, animeName, url } = info;
+  const { episodeId, episodeTitle } = episode;
   
   const folderName = "anime__" + animeName;
   let fileName = animeName + "__" + episodeTitle;
@@ -105,7 +105,7 @@ const downloadEpisode = async info => {
       url: source,
       filename: downloadFileName,
     });
-    const result = await observeProgress(downloadId, ({progress, status}) => {
+    const result = await observeProgress(downloadId, ({ progress, status }) => {
       eventEmitter.dispatch("download-update", {
         episode,
         status,
@@ -118,7 +118,7 @@ const downloadEpisode = async info => {
     }
   }
   
-  if(!sourcesSortedByHd.length){
+  if (!sourcesSortedByHd.length) {
     eventEmitter.dispatch("download-update", {
       episode,
       status: "fail",

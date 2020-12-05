@@ -1,4 +1,4 @@
-const {el} = require("@utils/utils");
+const { el } = require("@utils/utils");
 const _l = require("@utils/i18n");
 const eventEmitter = require("@utils/eventEmitter");
 

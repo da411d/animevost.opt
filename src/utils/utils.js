@@ -3,11 +3,11 @@ EventTarget.prototype.on = EventTarget.prototype.addEventListener;
 EventTarget.prototype.off = EventTarget.prototype.removeEventListener;
 
 HTMLDocument.prototype.qq = HTMLDocument.prototype.querySelector;
-HTMLDocument.prototype.qqq = function(selector){
+HTMLDocument.prototype.qqq = function (selector) {
   return Array.from(this.querySelectorAll(selector));
 };
 HTMLElement.prototype.qq = HTMLElement.prototype.querySelector;
-HTMLElement.prototype.qqq = function(selector){
+HTMLElement.prototype.qqq = function (selector) {
   return Array.from(this.querySelectorAll(selector));
 };
 const qq = HTMLElement.prototype.qq.bind(document.documentElement);
@@ -27,10 +27,10 @@ const mergeDeep = (target, source) => {
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
-        if (!target[key]) Object.assign(target, {[key]: {}});
+        if (!target[key]) Object.assign(target, { [key]: {} });
         mergeDeep(target[key], source[key]);
       } else {
-        Object.assign(target, {[key]: source[key]});
+        Object.assign(target, { [key]: source[key] });
       }
     }
   }

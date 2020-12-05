@@ -1,4 +1,4 @@
-const {downloads} = require("@utils/chrome");
+const { downloads } = require("@utils/chrome");
 
 module.exports = {
   get: (...args) => new Promise(resolve => downloads.search(...args, items => resolve(items.pop()))),

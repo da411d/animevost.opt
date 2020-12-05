@@ -1,6 +1,6 @@
-const {el} = require("@utils/utils");
+const { el } = require("@utils/utils");
 
-const {getURL} = chrome.runtime;
+const { getURL } = chrome.runtime;
 
 const style = el("link", {
   rel: "stylesheet",

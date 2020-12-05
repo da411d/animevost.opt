@@ -1,8 +1,8 @@
-const {el, sleep, qq, qqq} = require("@utils/utils");
+const { el, sleep, qq, qqq } = require("@utils/utils");
 const eventEmitter = require("@utils/eventEmitter");
 const _l = require("@utils/i18n");
 const chrome = require("@utils/chrome");
-const {getURL} = chrome.runtime;
+const { getURL } = chrome.runtime;
 
 const popup = require("./downloader-popup");
 
@@ -27,7 +27,7 @@ const renderLinks = () => {
   const episodes = createEpisodesList();
   
   for (const episode of episodes) {
-    const {episodeId, episodeTitle} = episode;
+    const { episodeId, episodeTitle } = episode;
     const eventDetails = {
       animeName,
       episode,
@@ -57,8 +57,8 @@ const renderLinks = () => {
 };
 
 const updateDownloadStatus = (info) => {
-  const {episode, status, progress} = info;
-  const {episodeId, episodeTitle} = episode;
+  const { episode, status, progress } = info;
+  const { episodeId, episodeTitle } = episode;
   
   const downloadLinkId = "episode-" + episodeId;
   const downloadLink = qq("#" + downloadLinkId);

@@ -53,7 +53,7 @@ const initConnection = connection => {
     connections.delete(connection);
   });
   connection.onMessage.addListener((...args) => {
-    const {event, details, _isEventEmitter} = args[0];
+    const { event, details, _isEventEmitter } = args[0];
     if (_isEventEmitter === true) {
       dispatch(event, details, false);
     }
