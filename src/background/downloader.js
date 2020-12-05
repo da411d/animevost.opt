@@ -1,6 +1,7 @@
 const {sleep} = require("@utils/utils");
 const eventEmitter = require("@utils/eventEmitter");
 const downloads = require("@utils/downloads");
+const { apiRequest } = require("./api");
 
 const ajax = async url => await fetch(url, {
   referrer: url,
@@ -10,6 +11,26 @@ const getVideoSrcset = async (info) => {
   const {episode, animeName, url} = info;
   const {episodeId, episodeTitle} = episode;
   
+  // Спочатку пробуєм достучатись по API
+  try {
+    const videoSources = await apiRequest("videolinks", {
+      id: episodeId,
+    });
+    const {links, hdlinks} = videoSources;
+    
+    const downloadLinks = [
+        ...hdlinks.filter(link => /\.mp4$/.test(link)),
+      ...links.filter(link => /\.mp4$/.test(link)),
+    ].filter(link => !link.includes("drek.cdn.zerocdn.com"));
+    
+    if(downloadLinks.length){
+      return downloadLinks;
+    }
+  } catch (e) {
+    console.warn("Unable to obtain episode video source via API\n", e);
+  }
+  
+  // Потом пробуєм спарсити силки з сайта
   try {
     // Посилаєм запит, щоб отримати код iframe плеєра, а звідти його src
     const playerIframeAPIEndpoint = new URL("/frame2.php?play=" + episodeId, url);
@@ -23,7 +44,10 @@ const getVideoSrcset = async (info) => {
     // Дістаєм звідти всі ссилки на скачування (вони в плеєрі зверху)
     const downloadLinks = [...playerDocument.querySelectorAll("a[download]")]
       .map(a => a.href);
-    return downloadLinks;
+    
+    if(downloadLinks.length){
+      return downloadLinks;
+    }
   } catch (e) {
     console.warn("Unable to obtain episode video source", e);
   }
@@ -92,6 +116,14 @@ const downloadEpisode = async info => {
     if (result === true) {
       return true;
     }
+  }
+  
+  if(!sourcesSortedByHd.length){
+    eventEmitter.dispatch("download-update", {
+      episode,
+      status: "fail",
+      progress: 0,
+    });
   }
 };
 
